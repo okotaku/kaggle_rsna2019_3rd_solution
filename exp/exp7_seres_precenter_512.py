@@ -25,7 +25,7 @@ from trainer import train_one_epoch
 # Constants
 # ===============
 DATA_DIR = "../input/"
-IMAGE_PATH = "../input/stage_1_train_images/"
+IMAGE_PATH = "../input/stage_2_train_images/"
 LOGGER_PATH = "log.txt"
 TRAIN_PATH = os.path.join(DATA_DIR, "rsna_train.csv")
 ID_COLUMNS = "Image"

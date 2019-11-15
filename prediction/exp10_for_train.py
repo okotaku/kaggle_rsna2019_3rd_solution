@@ -25,7 +25,7 @@ from trainer import predict
 # Constants
 # ===============
 DATA_DIR = "../input/"
-IMAGE_PATH = "../input/stage_1_train_images/"
+IMAGE_PATH = "../input/stage_2_train_images/"
 LOGGER_PATH = "log.txt"
 TRAIN_PATH = os.path.join(DATA_DIR, "rsna_train.csv")
 ID_COLUMNS = "Image"
@@ -96,7 +96,7 @@ def main():
         sub = sub.rename(columns={0: "Label"})
         sub = sub.drop("level_0", axis=1)
         LOGGER.info(sub.head())
-        sub.to_csv("{}_train.csv".format(EXP_ID), index=False)
+        sub.to_csv("../output/{}_train.csv".format(EXP_ID), index=False)
 
 
 if __name__ == '__main__':

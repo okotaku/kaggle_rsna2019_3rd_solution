@@ -28,7 +28,6 @@ from trainer import predict_external
 DATA_DIR = "../input/"
 IMAGE_PATH = ""
 LOGGER_PATH = "log.txt"
-TEST_PATH = os.path.join(DATA_DIR, "stage_1_sample_submission.csv")
 ID_COLUMNS = "Image"
 TARGET_COLUMNS = ["any", "epidural", "intraparenchymal", "intraventricular", "subarachnoid", "subdural"]
 N_CLASSES = 6

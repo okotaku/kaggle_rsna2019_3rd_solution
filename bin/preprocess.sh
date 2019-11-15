@@ -1,0 +1,22 @@
+mkdir exp/models
+mkdir input
+mkdir input_ext
+cd preprocess
+python preprocess_csv.py
+python creating-a-metadata-dataframe-fastai.py
+python make_user_df.py
+cd ..
+
+mkdir input/concat_all
+mkdir input/concat3
+mkdir input/concat5
+mkdir input/concat_prepost
+cd make_concat_images
+python all_concat.py
+python all_concat_test.py
+python concat3.py
+python concat3_test.py
+python concat5.py
+python concat5_test.py
+python concat_prepost.py
+python concat_prepost_test.py

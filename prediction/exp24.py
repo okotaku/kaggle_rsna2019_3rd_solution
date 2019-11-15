@@ -27,7 +27,7 @@ from trainer import predict
 DATA_DIR = "../input/"
 IMAGE_PATH = "../input/stage_2_test_images/"
 LOGGER_PATH = "log.txt"
-TEST_PATH = os.path.join(DATA_DIR, "test_concat_double_st2.csv")
+TEST_PATH = os.path.join(DATA_DIR, "test_concat_st2.csv")
 ID_COLUMNS = "Image"
 TARGET_COLUMNS = ["any", "epidural", "intraparenchymal", "intraventricular", "subarachnoid", "subdural"]
 N_CLASSES = 6
@@ -95,7 +95,7 @@ def main():
         sub = sub.rename(columns={0: "Label"})
         sub = sub.drop("level_0", axis=1)
         LOGGER.info(sub.head())
-        sub.to_csv("{}_sub_st2_ft.csv".format(EXP_ID), index=False)
+        sub.to_csv("../output/{}_sub_st2.csv".format(EXP_ID), index=False)
 
 
 if __name__ == '__main__':

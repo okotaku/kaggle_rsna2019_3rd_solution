@@ -99,7 +99,7 @@ def main():
         sub["POST_ID"] = pos_ids
         sub = postprocess_multitarget(sub)
         LOGGER.info(sub.head())
-        sub.to_csv("{}_sub_prepare_st2_ft.csv".format(EXP_ID), index=False)
+        sub.to_csv("../output/{}_sub_st2.csv".format(EXP_ID), index=False)
 
 
 if __name__ == '__main__':

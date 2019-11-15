@@ -100,7 +100,7 @@ def main():
         sub = sub.rename(columns={0: "Label"})
         sub = sub.drop("level_0", axis=1)
         LOGGER.info(sub.head())
-        sub.to_csv("{}_sub_st2_ft.csv".format(EXP_ID), index=False)
+        sub.to_csv("../output/{}_sub_st2.csv".format(EXP_ID), index=False)
 
 
 if __name__ == '__main__':

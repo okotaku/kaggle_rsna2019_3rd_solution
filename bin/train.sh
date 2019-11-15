@@ -1,0 +1,22 @@
+cd exp
+python exp7_seres_precenter_512.py
+cd ../prediction
+python exp7_externalv2.py
+
+cd ../exp
+python exp10_seres_threecenter_rescale_512.py
+python exp16_seres_concat.py
+python exp17_7_external.py
+python exp18_seres_concat_three.py
+python exp19_seres_doubleconcat.py
+python exp21_seres_doublepre.py
+python exp22_seres_doublepost.py
+python exp23_seres_doublepre_three.py
+python exp24_seres_doublepost_three.py
+python exp25_seres_conc3.py
+python exp26_seres_concall_prepost.py
+python exp27_seres_conc5.py
+python exp28_seres101_16.py
+python exp32_seres_conc_any.py
+python exp34_seres_threetarget.py
+python exp36_seres_double_threetarget.py

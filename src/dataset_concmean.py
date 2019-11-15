@@ -1,5 +1,4 @@
 import os
-import random
 
 import cv2
 import torch
@@ -299,36 +298,6 @@ class RSNADatasetTest(Dataset):
         image = np.expand_dims(image, axis=2)
 
         return image
-
-
-def pytorch_image_to_tensor_transform(image, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]):
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    image = image.transpose((2, 0, 1))
-    tensor = torch.from_numpy(image).float().div(255)
-
-    tensor[0] = (tensor[0] - mean[0]) / std[0]
-    tensor[1] = (tensor[1] - mean[1]) / std[1]
-    tensor[2] = (tensor[2] - mean[2]) / std[2]
-
-    return tensor
-
-def random_cropping(image, ratio = 0.8, is_random = True):
-    ratio = random.random() * (1-ratio) + ratio
-    height, width, _ = image.shape
-    target_h = int(height*ratio)
-    target_w = int(width*ratio)
-
-    if is_random:
-        start_x = random.randint(0, width - target_w)
-        start_y = random.randint(0, height - target_h)
-    else:
-        start_x = ( width - target_w ) // 2
-        start_y = ( height - target_h ) // 2
-
-    zeros = image[start_y:start_y+target_h,start_x:start_x+target_w,:]
-
-    #zeros = cv2.resize(zeros ,(width,height)) #pad to original size
-    return zeros
 
 
 def window_image(img, window_center, window_width, rescale=True):
