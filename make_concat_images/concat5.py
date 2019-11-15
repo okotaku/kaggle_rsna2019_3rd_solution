@@ -1,29 +1,57 @@
 import os
+import sys
 import gc
 import time
+
+import cv2
 import pydicom
+import pydicom.pixel_data_handlers.gdcm_handler as gdcm_handler
 import pandas as pd
 import numpy as np
-from collections import OrderedDict
 from contextlib import contextmanager
-import torch
 from torch.utils.data import DataLoader
-
-import sys
+from torch.utils.data import Dataset
 
 sys.path.append("../src")
 from utils import seed_torch
 from logger import setup_logger, LOGGER
 
 
-import os
-import cv2
-import pydicom
-import numpy as np
-from torch.utils.data import Dataset
-
-import pydicom.pixel_data_handlers.gdcm_handler as gdcm_handler
 pydicom.config.image_handlers = [None, gdcm_handler]
+
+
+# ===============
+# Constants
+# ===============
+DATA_DIR = "../input/"
+IMAGE_PATH = "../input/stage_2_train_images/"
+LOGGER_PATH = "log.txt"
+TRAIN_PATH = os.path.join(DATA_DIR, "train_concat.csv")
+ID_COLUMNS = "Image"
+TARGET_COLUMNS = ["any", "epidural", "intraparenchymal", "intraventricular", "subarachnoid", "subdural"]
+N_CLASSES = 6
+
+# ===============
+# Settings
+# ===============
+SEED = np.random.randint(100000)
+device = "cuda"
+img_size = 512
+batch_size = 32 * 8
+skip_id = "ID_6431af929"
+pre_cols = ["pre1_SOPInstanceUID", "pre2_SOPInstanceUID", "pre3_SOPInstanceUID", "pre4_SOPInstanceUID", "pre5_SOPInstanceUID"]
+post_cols = ["post1_SOPInstanceUID", "post2_SOPInstanceUID", "post3_SOPInstanceUID", "post4_SOPInstanceUID", "post5_SOPInstanceUID"]
+
+setup_logger(out_file=LOGGER_PATH)
+seed_torch(SEED)
+LOGGER.info("seed={}".format(SEED))
+
+
+@contextmanager
+def timer(name):
+    t0 = time.time()
+    yield
+    LOGGER.info('[{}] done in {} s'.format(name, round(time.time() - t0, 2)))
 
 
 class RSNADataset(Dataset):
@@ -115,54 +143,6 @@ def rescale_image(img, intercept, slope):
     img = (img * slope + intercept)
 
     return img
-
-# ===============
-# Constants
-# ===============
-DATA_DIR = "../input/"
-IMAGE_PATH = "../input/stage_1_train_images/"
-LOGGER_PATH = "log.txt"
-TRAIN_PATH = os.path.join(DATA_DIR, "train_concat5.csv")
-ID_COLUMNS = "Image"
-TARGET_COLUMNS = ["any", "epidural", "intraparenchymal", "intraventricular", "subarachnoid", "subdural"]
-N_CLASSES = 6
-
-# ===============
-# Settings
-# ===============
-SEED = np.random.randint(100000)
-device = "cuda"
-img_size = 512
-upper_bs = 1
-batch_size = 32 * 8
-epochs = 5
-EXP_ID = "exp24_seres"
-#model_path = "../exp/models/{}_ep{}.pth".format(EXP_ID, 4)
-model_path = None
-skip_id = "ID_6431af929"
-pre_cols = ["pre_SOPInstanceUID", "prepre_SOPInstanceUID", "pre3_SOPInstanceUID", "pre4_SOPInstanceUID", "pre5_SOPInstanceUID"]
-post_cols = ["post_SOPInstanceUID", "postpost_SOPInstanceUID", "post3_SOPInstanceUID", "post4_SOPInstanceUID", "post5_SOPInstanceUID"]
-
-setup_logger(out_file=LOGGER_PATH)
-seed_torch(SEED)
-LOGGER.info("seed={}".format(SEED))
-
-
-@contextmanager
-def timer(name):
-    t0 = time.time()
-    yield
-    LOGGER.info('[{}] done in {} s'.format(name, round(time.time() - t0, 2)))
-
-
-def fix_model_state_dict(state_dict):
-    new_state_dict = OrderedDict()
-    for k, v in state_dict.items():
-        name = k
-        if name.startswith('module.'):
-            name = name[7:]  # remove 'module.' of dataparallel
-        new_state_dict[name] = v
-    return new_state_dict
 
 
 def main():
