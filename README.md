@@ -25,7 +25,7 @@
 |exp36_seres_double_threetarget  |subdural  |st-2, st, st+2  |st-2, st, st+2  |  |
 
 # Usage
-1. Download datasets in input dir.
+1. Download [datasets](https://www.kaggle.com/c/rsna-intracranial-hemorrhage-detection/data) in input dir.
 
 2. preprocessing
 ```sh
@@ -55,6 +55,10 @@ sh bin/stack.sh
 
 # Usage Demo
 only predition with pretrained models.
+
+1. Download models from [kaggle datasets](https://www.kaggle.com/takuok/rsna-3rdplace-models).
+
+2.Run prediction
 ```sh
 sh bin/demo.sh
 ```
