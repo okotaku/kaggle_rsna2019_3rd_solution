@@ -51,7 +51,7 @@ with timer('load data'):
     train_meta = feather.read_dataframe("../input/df_trn.fth")
     train_label = train_label[train_label.ID != "ID_6431af929"].reset_index(drop=True)
     train_meta = train_meta[train_meta.SOPInstanceUID != "ID_6431af929"].reset_index(drop=True)
-    test_meta = feather.read_dataframe("../input/creating-a-metadata-dataframe-fastai/df_tst.fth")
+    test_meta = feather.read_dataframe("../input/df_tst.fth")
     train_meta.drop(dcm_feats, axis=1, inplace=True)
     test_meta.drop(dcm_feats, axis=1, inplace=True)
 

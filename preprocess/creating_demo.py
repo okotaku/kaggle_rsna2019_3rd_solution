@@ -9,6 +9,7 @@
 # In[4]:
 
 
+import gc
 from fastai2.basics import *
 from fastai2.medical.imaging import *
 
@@ -39,21 +40,6 @@ len(fns_tst)
 
 fn = fns_tst[0]
 dcm = fn.dcmread()
-
-
-# In[13]:
-
-
-df_lbls.mean()
-
-
-# There's not much RAM on these kaggle kernel instances, so we'll clean up as we go.
-
-# In[14]:
-
-
-del(df_lbls)
-import gc; gc.collect();
 
 
 # # DICOM Meta

@@ -47,7 +47,7 @@ def preprocess_train_result(df, prefix):
 
 
 with timer('load data'):
-    test_meta = feather.read_dataframe("../input/creating-a-metadata-dataframe-fastai/df_tst.fth")
+    test_meta = feather.read_dataframe("../input/df_tst.fth")
     test_meta.drop(dcm_feats, axis=1, inplace=True)
 
 with timer('load test pred'):
