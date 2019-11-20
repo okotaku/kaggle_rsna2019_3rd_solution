@@ -125,7 +125,7 @@ def do_ensemble(x, y, test_x, feats):
 
 with timer('load data'):
     merge_label = pd.read_csv("../input/merge_label.csv")
-    merge_test = pd.read_csv("../input/merge_test_st2.csv")
+    merge_test = pd.read_csv("../input/merge_test.csv")
     pred_cols = list(np.load("../input/pred_cols.npy"))
 
 with timer('create features'):
