@@ -53,5 +53,21 @@ then download output file in output dir.
 sh bin/stack.sh
 ```
 
+# Usage Demo
+only predition with pretrained models.
+```sh
+sh bin/demo.sh
+```
+
+# Hardware and environment
+[GCP deep learning vm](https://console.cloud.google.com/marketplace/details/click-to-deploy-images/deeplearning?q=deep%20learning%20vm&id=8857b4a3-f60f-40b2-9b32-22b4428fd256&project=dena-ai-training-35-gcp&organizationId=683655960516)
+- gpu: V100*2
+- cpu: n1-standard-16(16 vCPU, 60GM RAM)
+
+# Install
+```sh
+pip install -r requirements.txt
+```
+
 # License
 The license is MIT.
