@@ -56,7 +56,7 @@ sh bin/stack.sh
 # Usage Demo
 only predition with pretrained models.
 
-1. Download models from [kaggle datasets](https://www.kaggle.com/takuok/rsna-3rdplace-models).
+1.Download models from [kaggle datasets](https://www.kaggle.com/takuok/rsna-3rdplace-models).
 
 2.Run prediction
 ```sh
