@@ -57,21 +57,21 @@ class RSNADataset(Dataset):
         cur_idx_row = self.df.iloc[idx]
         img_id = cur_idx_row[self.id_colname]
         if self.pick_type == "pre_post":
-            img_id_pre = cur_idx_row[["pre_SOPInstanceUID"]].fillna(img_id).values[0]
-            img_id_post = cur_idx_row[["post_SOPInstanceUID"]].fillna(img_id).values[0]
+            img_id_pre = cur_idx_row[["pre1_SOPInstanceUID"]].fillna(img_id).values[0]
+            img_id_post = cur_idx_row[["post1_SOPInstanceUID"]].fillna(img_id).values[0]
         elif self.pick_type == "pre_pre":
-            img_id_pre = cur_idx_row[["pre_SOPInstanceUID"]].fillna(img_id).values[0]
-            img_id_post = cur_idx_row[["prepre_SOPInstanceUID"]].fillna(img_id_pre).values[0]
+            img_id_pre = cur_idx_row[["pre1_SOPInstanceUID"]].fillna(img_id).values[0]
+            img_id_post = cur_idx_row[["pre2_SOPInstanceUID"]].fillna(img_id_pre).values[0]
         elif self.pick_type == "post_post":
-            img_id_pre = cur_idx_row[["post_SOPInstanceUID"]].fillna(img_id).values[0]
-            img_id_post = cur_idx_row[["postpost_SOPInstanceUID"]].fillna(img_id_pre).values[0]
+            img_id_pre = cur_idx_row[["post1_SOPInstanceUID"]].fillna(img_id).values[0]
+            img_id_post = cur_idx_row[["post2_SOPInstanceUID"]].fillna(img_id_pre).values[0]
         if self.user_window == 1:
             img = self._get_img(img_id, 1)
             img_pre = self._get_img(img_id_pre, 2)
             img_post = self._get_img(img_id_post, 3)
         elif self.user_window == 2:
-            img_id_prepre = cur_idx_row[["prepre_SOPInstanceUID"]].fillna(img_id_pre).values[0]
-            img_id_postpost = cur_idx_row[["postpost_SOPInstanceUID"]].fillna(img_id_post).values[0]
+            img_id_prepre = cur_idx_row[["pre2_SOPInstanceUID"]].fillna(img_id_pre).values[0]
+            img_id_postpost = cur_idx_row[["post2_SOPInstanceUID"]].fillna(img_id_post).values[0]
             img = self._get_img(img_id, 1)
             img_pre = self._get_img(img_id_prepre, 2)
             img_post = self._get_img(img_id_postpost, 3)
