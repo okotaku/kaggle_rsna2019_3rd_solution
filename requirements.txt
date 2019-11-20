@@ -1,0 +1,6 @@
+pydicom
+pretrainedmodels
+albumentations
+efficientnet_pytorch
+feather-format
+git+https://github.com/fastai/fastai_dev

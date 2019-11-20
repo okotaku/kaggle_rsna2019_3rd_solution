@@ -5,12 +5,6 @@
 # 
 # First, we'll install the latest versions of pytorch and fastai v2 (not officially released yet) so we can use the fastai medical imaging module.
 
-# In[1]:
-
-
-get_ipython().system('pip install torch torchvision feather-format kornia pyarrow --upgrade   > /dev/null')
-get_ipython().system('pip install git+https://github.com/fastai/fastai_dev             > /dev/null')
-
 
 # In[4]:
 
@@ -52,7 +46,6 @@ len(fns_tst)
 
 fn = fns_tst[0]
 dcm = fn.dcmread()
-dcm
 
 
 # # Labels
@@ -69,7 +62,7 @@ def save_lbls():
     lbls.drop_duplicates(['ID','htype'], inplace=True)
     pvt = lbls.pivot('ID', 'htype', 'Label')
     pvt.reset_index(inplace=True)    
-    pvt.to_feather('labels_st2.fth')
+    pvt.to_feather('../input/labels_st2.fth')
 
 
 # In[11]:
@@ -81,7 +74,7 @@ save_lbls()
 # In[12]:
 
 
-df_lbls = pd.read_feather('labels_st2.fth').set_index('ID')
+df_lbls = pd.read_feather('../input/labels_st2.fth').set_index('ID')
 df_lbls.head(8)
 
 
@@ -107,7 +100,7 @@ import gc; gc.collect();
 # In[15]:
 
 
-get_ipython().run_line_magic('time', 'df_tst = pd.DataFrame.from_dicoms(fns_tst, px_summ=True)')
+df_tst = pd.DataFrame.from_dicoms(fns_tst, px_summ=True)
 df_tst.to_feather('../input/df_tst_st2.fth')
 df_tst.head()
 
@@ -122,7 +115,7 @@ gc.collect();
 # In[14]:
 
 
-get_ipython().run_line_magic('time', 'df_trn = pd.DataFrame.from_dicoms(fns_trn, px_summ=True)')
+df_trn = pd.DataFrame.from_dicoms(fns_trn, px_summ=True)
 df_trn.to_feather('../input/df_trn.fth')
 
 
