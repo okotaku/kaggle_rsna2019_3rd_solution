@@ -1,6 +1,7 @@
 mkdir exp/models
 mkdir input
 mkdir input_ext
+mkdir output
 cd preprocess
 python preprocess_csv.py
 python creating-a-metadata-dataframe-fastai.py
