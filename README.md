@@ -55,6 +55,7 @@ sh bin/stack.sh
 
 # Usage Demo
 only predition with pretrained models.
+This pipeline use user stacking only. The private score=0.04393.
 
 1.Download models from [kaggle datasets](https://www.kaggle.com/takuok/rsna-3rdplace-models).
 
