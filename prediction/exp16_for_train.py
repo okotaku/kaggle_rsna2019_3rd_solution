@@ -60,11 +60,11 @@ def main():
     with timer('load data'):
         df = pd.read_csv(TRAIN_PATH)[:10]
         df = df[df.Image != "ID_6431af929"].reset_index(drop=True)
-        df.loc[df.pre_SOPInstanceUID == "ID_6431af929", "pre_SOPInstanceUID"] = df.loc[
+        df.loc[df.pre_SOPInstanceUID == "ID_6431af929", "pre1_SOPInstanceUID"] = df.loc[
             df.pre_SOPInstanceUID == "ID_6431af929", "Image"]
-        df.loc[df.post_SOPInstanceUID == "ID_6431af929", "post_SOPInstanceUID"] = df.loc[
+        df.loc[df.post_SOPInstanceUID == "ID_6431af929", "post1_SOPInstanceUID"] = df.loc[
             df.post_SOPInstanceUID == "ID_6431af929", "Image"]
-        df = df[["Image", "pre_SOPInstanceUID", "post_SOPInstanceUID"]]
+        df = df[["Image", "pre1_SOPInstanceUID", "post1_SOPInstanceUID"]]
         ids = df["Image"].values
         gc.collect()
 

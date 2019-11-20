@@ -31,8 +31,8 @@ LOGGER_PATH = "log.txt"
 TEST_PATH = os.path.join(DATA_DIR, "test_concat_st2.csv")
 ID_COLUMNS = "Image"
 TARGET_COLUMNS = ["any", "epidural", "intraparenchymal", "intraventricular", "subarachnoid", "subdural",
-                  "prepre_any", "prepre_epidural", "prepre_intraparenchymal", "prepre_intraventricular", "prepre_subarachnoid", "prepre_subdural",
-                  "postpost_any", "postpost_epidural", "postpost_intraparenchymal", "postpost_intraventricular", "postpost_subarachnoid", "postpost_subdural"]
+                  "pre2_any", "pre2_epidural", "pre2_intraparenchymal", "pre2_intraventricular", "pre2_subarachnoid", "pre2_subdural",
+                  "post2_any", "post2_epidural", "post2_intraparenchymal", "post2_intraventricular", "post2_subarachnoid", "post2_subdural"]
 N_CLASSES = 18
 
 # ===============
@@ -62,16 +62,16 @@ def timer(name):
 def main():
     with timer('load data'):
         df = pd.read_csv(TEST_PATH)
-        df["post_SOPInstanceUID"] = df["post_SOPInstanceUID"].fillna(df["SOPInstanceUID"])
-        df["pre_SOPInstanceUID"] = df["pre_SOPInstanceUID"].fillna(df["SOPInstanceUID"])
-        df["postpost_SOPInstanceUID"] = df["postpost_SOPInstanceUID"].fillna(
-            df["post_SOPInstanceUID"])
-        df["prepre_SOPInstanceUID"] = df["prepre_SOPInstanceUID"].fillna(
-            df["pre_SOPInstanceUID"])
-        df = df[["Image", "pre_SOPInstanceUID", "post_SOPInstanceUID", "prepre_SOPInstanceUID", "postpost_SOPInstanceUID"]]
+        df["post1_SOPInstanceUID"] = df["post1_SOPInstanceUID"].fillna(df["SOPInstanceUID"])
+        df["pre1_SOPInstanceUID"] = df["pre1_SOPInstanceUID"].fillna(df["SOPInstanceUID"])
+        df["post2_SOPInstanceUID"] = df["post2_SOPInstanceUID"].fillna(
+            df["post1_SOPInstanceUID"])
+        df["pre2_SOPInstanceUID"] = df["pre2_SOPInstanceUID"].fillna(
+            df["pre1_SOPInstanceUID"])
+        df = df[["Image", "pre1_SOPInstanceUID", "post1_SOPInstanceUID", "pre2_SOPInstanceUID", "post2_SOPInstanceUID"]]
         ids = df["Image"].values
-        pre_ids = df["prepre_SOPInstanceUID"].values
-        pos_ids = df["postpost_SOPInstanceUID"].values
+        pre_ids = df["pre2_SOPInstanceUID"].values
+        pos_ids = df["post2_SOPInstanceUID"].values
         gc.collect()
 
     with timer('preprocessing'):

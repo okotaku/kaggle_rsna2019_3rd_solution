@@ -59,7 +59,7 @@ def timer(name):
 def main():
     with timer('load data'):
         df = pd.read_csv(TEST_PATH)
-        df = df[["Image", "pre_SOPInstanceUID", "post_SOPInstanceUID"]]
+        df = df[["Image", "pre1_SOPInstanceUID", "post1_SOPInstanceUID"]]
         ids = df["Image"].values
         gc.collect()
 

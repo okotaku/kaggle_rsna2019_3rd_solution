@@ -29,9 +29,9 @@ IMAGE_PATH = "../input/stage_2_test_images/"
 LOGGER_PATH = "log.txt"
 TEST_PATH = os.path.join(DATA_DIR, "test_concat_st2.csv")
 ID_COLUMNS = "Image"
-TARGET_COLUMNS = TARGET_COLUMNS = ["any", "epidural", "intraparenchymal", "intraventricular", "subarachnoid", "subdural",
-                  "pre_any", "pre_epidural", "pre_intraparenchymal", "pre_intraventricular", "pre_subarachnoid", "pre_subdural",
-                  "post_any", "post_epidural", "post_intraparenchymal", "post_intraventricular", "post_subarachnoid", "post_subdural"]
+TARGET_COLUMNS = ["any", "epidural", "intraparenchymal", "intraventricular", "subarachnoid", "subdural",
+                  "pre1_any", "pre1_epidural", "pre1_intraparenchymal", "pre1_intraventricular", "pre1_subarachnoid", "pre1_subdural",
+                  "post1_any", "post1_epidural", "post1_intraparenchymal", "post1_intraventricular", "post1_subarachnoid", "post1_subdural"]
 N_CLASSES = 18
 
 # ===============
@@ -61,12 +61,12 @@ def timer(name):
 def main():
     with timer('load data'):
         df = pd.read_csv(TEST_PATH)
-        df["post_SOPInstanceUID"] = df["post_SOPInstanceUID"].fillna(df["SOPInstanceUID"])
-        df["pre_SOPInstanceUID"] = df["pre_SOPInstanceUID"].fillna(df["SOPInstanceUID"])
-        df = df[["Image", "pre_SOPInstanceUID", "post_SOPInstanceUID"]]
+        df["post_SOPInstanceUID"] = df["post1_SOPInstanceUID"].fillna(df["SOPInstanceUID"])
+        df["pre_SOPInstanceUID"] = df["pre1_SOPInstanceUID"].fillna(df["SOPInstanceUID"])
+        df = df[["Image", "pre1_SOPInstanceUID", "post1_SOPInstanceUID"]]
         ids = df["Image"].values
-        pre_ids = df["pre_SOPInstanceUID"].values
-        pos_ids = df["post_SOPInstanceUID"].values
+        pre_ids = df["pre1_SOPInstanceUID"].values
+        pos_ids = df["post1_SOPInstanceUID"].values
         gc.collect()
 
     with timer('preprocessing'):
